@@ -1,11 +1,12 @@
 using CarRenting.Data;
+using CarRenting.Infrastructures;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options
+var connectionString = @"Server=.;Database=CarRenting;Integrated Security=True;";
+    builder.Services.AddDbContext<CarRentingDbContext>(options => options
     .UseSqlServer(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -17,11 +18,13 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequireUppercase = true;
 })
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<CarRentingDbContext>();
 
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+app.PreparedDatabase();
 
 if (app.Environment.IsDevelopment())
 {
