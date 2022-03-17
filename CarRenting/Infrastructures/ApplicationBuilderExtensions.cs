@@ -33,7 +33,6 @@ namespace CarRenting.Infrastructures
             {
                 new Category { Name = "Economy"},
                 new Category { Name = "Comfort"},
-                new Category { Name = "Comfort +"},
                 new Category { Name = "Business"},
                 new Category { Name = "Premier"},
                 new Category { Name = "Elite"},
