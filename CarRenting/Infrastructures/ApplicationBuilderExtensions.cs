@@ -15,10 +15,8 @@ namespace CarRenting.Infrastructures
 
             data.Database.Migrate();
 
-            if (!data.Categories.Any())
-            {
+            SeedCategories(data);
 
-            }
             return app;
         }
 
@@ -33,8 +31,7 @@ namespace CarRenting.Infrastructures
             {
                 new Category { Name = "Economy"},
                 new Category { Name = "Comfort"},
-                new Category { Name = "Business"},
-                new Category { Name = "Premier"},
+                new Category { Name = "Premium"},
                 new Category { Name = "Elite"},
                 new Category { Name = "SUV"},
                 new Category { Name = "Minivan"},
