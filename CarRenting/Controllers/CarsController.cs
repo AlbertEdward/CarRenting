@@ -17,17 +17,29 @@ namespace CarRenting.Controllers
             Categories = this.GetCarCategories()
         });
 
-        public IActionResult All(string searchTerm)
+        public IActionResult All([FromQuery]AllCarsQueryModel query)
         {
             var carsQuery = this.data.Cars.AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(searchTerm))
+            if (!string.IsNullOrWhiteSpace(query.Brand))
+            {
+                carsQuery = carsQuery.Where(c => c.Make == query.Brand);
+            }
+
+            if (!string.IsNullOrWhiteSpace(query.SearchTerm))
             {
                 carsQuery = carsQuery.Where(c =>
-                    c.Make.ToLower().Contains(searchTerm.ToLower()) ||
-                    c.Model.ToLower().Contains(searchTerm.ToLower()) ||
-                    c.Description.ToLower().Contains(searchTerm.ToLower()));
+                    c.Make.ToLower().Contains(query.SearchTerm.ToLower()) ||
+                    c.Model.ToLower().Contains(query.SearchTerm.ToLower()) ||
+                    c.Description.ToLower().Contains(query.SearchTerm.ToLower()));
             }
+
+            carsQuery = query.Sorting switch
+            {
+                CarSorting.Year => carsQuery.OrderByDescending(c => c.Year),
+                CarSorting.BrandAndModel => carsQuery.OrderBy(c => c.Make).ThenBy(c => c.Model),
+                CarSorting.DateCreated or  _ => carsQuery.OrderByDescending(c => c.Id)
+            };
 
             var cars = carsQuery
                 .OrderByDescending(c => c.Id)
@@ -42,11 +54,16 @@ namespace CarRenting.Controllers
                 })
                 .ToList();
 
-            return View(new AllCarsQueryModel
-            {
-                Cars = cars,
-                SearchTerm = searchTerm
-            });
+            var carBrands = this.data
+                .Cars
+                .Select(c => c.Make)
+                .Distinct()
+                .ToList();
+
+            query.Brands = carBrands;
+            query.Cars = cars;
+
+            return View(query);
         }
 
         [HttpPost]
