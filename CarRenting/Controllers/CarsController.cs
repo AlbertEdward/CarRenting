@@ -19,6 +19,7 @@ namespace CarRenting.Controllers
 
         public IActionResult All([FromQuery]AllCarsQueryModel query)
         {
+            var queryString = Request.Query;
             var carsQuery = this.data.Cars.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(query.Brand))
@@ -42,6 +43,8 @@ namespace CarRenting.Controllers
             };
 
             var cars = carsQuery
+                .Skip((query.CurrentPage - 1) * AllCarsQueryModel.CarsPerPage)
+                .Take(AllCarsQueryModel.CarsPerPage)
                 .OrderByDescending(c => c.Id)
                 .Select(car => new CarListingViewModel
                 {
