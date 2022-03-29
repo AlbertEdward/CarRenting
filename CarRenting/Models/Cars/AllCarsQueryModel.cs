@@ -4,7 +4,7 @@ namespace CarRenting.Models.Cars
 {
     public class AllCarsQueryModel
     {
-        public const int CarsPerPage = 6;
+        public const int CarsPerPage = 3;
         public string Brand { get; set; }
         public IEnumerable<string> Brands { get; set; }
 
@@ -12,6 +12,9 @@ namespace CarRenting.Models.Cars
         public string SearchTerm { get; init; }
 
         public int CurrentPage { get; init; } = 1;
+
+        public int TotalCars { get; set; }
+
 
         public CarSorting Sorting { get; init; }
 
