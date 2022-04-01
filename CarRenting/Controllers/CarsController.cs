@@ -1,6 +1,7 @@
 ﻿using CarRenting.Data;
 using CarRenting.Data.Models;
 using CarRenting.Models.Cars;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRenting.Controllers
@@ -11,7 +12,7 @@ namespace CarRenting.Controllers
 
         public CarsController(CarRentingDbContext data) => this.data=data;
  
-
+        [Authorize]
         public IActionResult Add() => View(new AddCarFormModel
         {
             Categories = this.GetCarCategories()
@@ -73,6 +74,7 @@ namespace CarRenting.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Add(AddCarFormModel car)
         {
             if (!this.data.Categories.Any(c=>c.Id == car.CategoryId))
