@@ -15,6 +15,7 @@ namespace CarRenting.Models.Cars
 
         public int TotalCars { get; set; }
 
+        public bool IsActive { get; set; } = true;
 
         public CarSorting Sorting { get; init; }
 

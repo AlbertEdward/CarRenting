@@ -56,7 +56,8 @@ namespace CarRenting.Controllers
                     Model = car.Model,
                     Year = car.Year,
                     ImageUrl = car.ImageUrl,
-                    Category = car.Category.Name
+                    Category = car.Category.Name,
+                    IsActive = car.IsActive
                 })
                 .ToList();
 
@@ -96,6 +97,7 @@ namespace CarRenting.Controllers
                 ImageUrl = car.ImageUrl,
                 Year = car.Year,
                 CategoryId = car.CategoryId,
+                IsActive = car.IsActive
             };
 
             this.data.Cars.Add(carData);
@@ -113,5 +115,21 @@ namespace CarRenting.Controllers
                     Name = c.Name
                 })
                 .ToList();
+
+        public CarDetailsModel Details(int id)
+            => this.data
+            .Cars
+            .Where(c => c.Id == id)
+            .Select(c => new CarDetailsModel
+            {
+                Make = c.Make,
+                Model = c.Model,
+                Description = c.Description,
+                ImageUrl = c.ImageUrl,
+                Year = c.Year,
+                Category = c.Category.Name,
+                IsActive = c.IsActive
+            })
+            .FirstOrDefault();
     }
 }

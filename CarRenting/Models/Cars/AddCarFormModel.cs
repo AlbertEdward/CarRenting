@@ -23,6 +23,9 @@ namespace CarRenting.Models.Cars
         [Display(Name = "Image Url")]
         public string ImageUrl { get; init; }
 
+        [Required]
+        public bool IsActive { get; set; } = true;
+
         public int Year { get; init; }
 
         [Display(Name ="Category")]

@@ -12,6 +12,8 @@
 
         public int Year { get; set; }
 
+        public bool IsActive { get; set; }
+
         public string Category { get; set; }
     }
 }
