@@ -3,7 +3,7 @@ using static CarRenting.Data.DataConstants;
 
 namespace CarRenting.Models.Cars
 {
-    public class AddCarFormModel
+    public class CarFormModel
     {
         [Required]
         [StringLength(CarMakeMaxLength)]

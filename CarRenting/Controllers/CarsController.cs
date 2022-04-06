@@ -13,7 +13,7 @@ namespace CarRenting.Controllers
         public CarsController(CarRentingDbContext data) => this.data=data;
  
         [Authorize]
-        public IActionResult Add() => View(new AddCarFormModel
+        public IActionResult Add() => View(new CarFormModel
         {
             Categories = this.GetCarCategories()
         });
@@ -76,7 +76,7 @@ namespace CarRenting.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Add(AddCarFormModel car)
+        public IActionResult Add(CarFormModel car)
         {
             if (!this.data.Categories.Any(c=>c.Id == car.CategoryId))
             {
@@ -89,7 +89,24 @@ namespace CarRenting.Controllers
                 return View(car);
             }
 
-            var carData = new Car
+            this.cars.Create(
+                car.Make,
+                car.Model,
+                car.Description,
+                car.ImageUrl,
+                car.Year,
+                car.CategoryId,
+                car.IsActive); 
+                
+            return RedirectToAction(nameof(All));
+        }
+
+        [Authorize]
+        public IActionResult Edit(int id)
+        {
+            var car = this.Cars.Details(id);
+
+            return View(new CarFormModel
             {
                 Make = car.Make,
                 Model = car.Model,
@@ -98,12 +115,7 @@ namespace CarRenting.Controllers
                 Year = car.Year,
                 CategoryId = car.CategoryId,
                 IsActive = car.IsActive
-            };
-
-            this.data.Cars.Add(carData);
-            this.data.SaveChanges();
-
-            return RedirectToAction(nameof(All));
+            });
         }
 
         private IEnumerable<CarCategoryViewModel> GetCarCategories() 
