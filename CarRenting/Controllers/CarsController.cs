@@ -89,34 +89,34 @@ namespace CarRenting.Controllers
                 return View(car);
             }
 
-            this.cars.Create(
-                car.Make,
-                car.Model,
-                car.Description,
-                car.ImageUrl,
-                car.Year,
-                car.CategoryId,
-                car.IsActive); 
-                
+            //this.cars.Create(
+            //    car.Make,
+            //    car.Model,
+            //    car.Description,
+            //    car.ImageUrl,
+            //    car.Year,
+            //    car.CategoryId,
+            //    car.IsActive); 
+            
             return RedirectToAction(nameof(All));
         }
 
-        [Authorize]
-        public IActionResult Edit(int id)
-        {
-            var car = this.Cars.Details(id);
+        //[Authorize]
+        //public IActionResult Edit(int id)
+        //{
+        //    var car = this.cars.Details(id);
 
-            return View(new CarFormModel
-            {
-                Make = car.Make,
-                Model = car.Model,
-                Description = car.Description,
-                ImageUrl = car.ImageUrl,
-                Year = car.Year,
-                CategoryId = car.CategoryId,
-                IsActive = car.IsActive
-            });
-        }
+        //    return View(new CarFormModel
+        //    {
+        //        Make = car.Make,
+        //        Model = car.Model,
+        //        Description = car.Description,
+        //        ImageUrl = car.ImageUrl,
+        //        Year = car.Year,
+        //        CategoryId = car.CategoryId,
+        //        IsActive = car.IsActive
+        //    });
+        //}
 
         private IEnumerable<CarCategoryViewModel> GetCarCategories() 
             => this.data

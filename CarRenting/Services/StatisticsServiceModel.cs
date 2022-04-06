@@ -1,13 +1,11 @@
-﻿namespace CarRenting.Models.Home
+﻿namespace CarRenting.Services
 {
-    public class IndexViewModel
+    public class StatisticsServiceModel
     {
         public int TotalCars { get; init; }
 
         public int TotalUsers { get; init; }
 
         public int TotalRents { get; init; }
-
-        public List<CarIndexViewModel> Cars { get; init; }
     }
 }
