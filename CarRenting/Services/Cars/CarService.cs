@@ -62,5 +62,12 @@ namespace CarRenting.Services.Cars
                 Cars = cars
             };
         }
+
+        public IEnumerable<string> AllCarBrands()
+            => this.data
+                .Cars
+                .Select(c => c.Make)
+                .Distinct()
+                .ToList();
     }
 }

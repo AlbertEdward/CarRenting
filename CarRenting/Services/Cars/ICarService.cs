@@ -10,5 +10,7 @@ namespace CarRenting.Services.Cars
             CarSorting sorting,
             int currentPage,
             int carsPerPage);
+
+        IEnumerable<string> AllCarBrands();
     }
 }
