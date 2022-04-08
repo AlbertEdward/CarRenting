@@ -4,7 +4,7 @@ namespace CarRenting.Services.Cars
 {
     public interface ICarService
     {
-        CarQueryServiceModel All(
+        CarQueryServiceModel AllActiveCars(
             string brand,
             string searchTerm,
             CarSorting sorting,
@@ -12,5 +12,12 @@ namespace CarRenting.Services.Cars
             int carsPerPage);
 
         IEnumerable<string> AllCarBrands();
+
+        CarQueryServiceModel AllCarsInactive(
+            string brand,
+            string searchTerm,
+            CarSorting sorting,
+            int currentPage,
+            int carsPerPage);
     }
 }

@@ -18,7 +18,7 @@ namespace CarRenting.Controllers.Api
 
         [HttpGet]
         public CarQueryServiceModel All([FromQuery] AllCarsApiRequestModel query)
-            => this.cars.All(
+            => this.cars.AllActiveCars(
                 query.Brand,
                 query.SearchTerm,
                 query.Sorting,
