@@ -8,6 +8,8 @@
 
         public int TotalRents { get; init; }
 
+        public int ActiveIndex { get; set; }
+
         public List<CarIndexViewModel> Cars { get; init; }
     }
 }

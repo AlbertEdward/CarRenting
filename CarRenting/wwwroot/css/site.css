@@ -29,3 +29,30 @@ img {
     margin-left: auto;
     margin-right: auto;
 }
+
+.carousel-caption {
+  position: static;
+}
+
+.carousel img {
+  height: 240px;
+  width: auto;
+  object-fit: contain;
+}
+@media (min-width: 575.98px) { 
+  .carousel img {
+    height: 290px;
+  }
+}
+
+@media (min-width: 767.98px) {   
+  .carousel img {
+    height: 390px;
+  }
+}
+
+@media (min-width: 991.98px) { 
+  .carousel img {
+    height: 435px;
+  }
+}
