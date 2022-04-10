@@ -167,6 +167,30 @@ namespace CarRenting.Services.Cars
             return carData.Id;
         }
 
+        public bool Edit(int id, string make, string model, string description, string imageUrl, int year, int categoryId, bool isActive)
+        {
+            var carData = this.data.Cars.Find(id);
+
+            //TODO Add AdminRole who is alowed to edit cars.
+
+            if (carData == null)
+            {
+                return false;
+            }
+
+            carData.Brand = make;
+            carData.Model = model;
+            carData.Description = description;
+            carData.ImageUrl = imageUrl;
+            carData.Year = year;
+            carData.CategoryId = categoryId;
+            carData.IsActive = isActive;
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
         public CarDetailsServiceModel Details(int id)
         => this.data
             .Cars

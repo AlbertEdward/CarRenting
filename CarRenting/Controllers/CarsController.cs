@@ -115,5 +115,39 @@ namespace CarRenting.Controllers
                 Categories = this.carService.AllCategories()
             });
         }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Edit(int id, CarFormModel car)
+        {
+            if (!this.carService.CategoryExists(car.CategoryId))
+            {
+                this.ModelState.AddModelError(nameof(car.CategoryId), "Category does not exist.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                car.Categories = this.carService.AllCategories();
+
+                return View(car);
+            }
+
+            var carIsEdited = this.carService.Edit(
+                id,
+                car.Brand,
+                car.Model,
+                car.Description,
+                car.ImageUrl,
+                car.Year,
+                car.CategoryId,
+                car.IsActive);
+
+            if (!carIsEdited)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }

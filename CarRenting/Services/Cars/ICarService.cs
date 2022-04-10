@@ -22,6 +22,16 @@ namespace CarRenting.Services.Cars
             int categoryId,
             bool isActive);
 
+        bool Edit(
+            int id,
+            string brand,
+            string model,
+            string description,
+            string imageUrl,
+            int year,
+            int categoryId,
+            bool isActive);
+
         IEnumerable<string> AllBrands();
 
         CarQueryServiceModel AllInactive(
