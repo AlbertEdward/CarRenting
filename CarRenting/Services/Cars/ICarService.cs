@@ -11,13 +11,29 @@ namespace CarRenting.Services.Cars
             int currentPage,
             int carsPerPage);
 
-        IEnumerable<string> AllCarBrands();
+        CarDetailsServiceModel Details(int id);
 
-        CarQueryServiceModel AllCarsInactive(
+        int Create(
+            string brand,
+            string model,
+            string description,
+            string imageUrl,
+            int year,
+            int categoryId,
+            bool isActive);
+
+        IEnumerable<string> AllBrands();
+
+        CarQueryServiceModel AllInactive(
             string brand,
             string searchTerm,
             CarSorting sorting,
             int currentPage,
             int carsPerPage);
+
+        IEnumerable<CarCategoryServiceModel> AllCategories();
+
+        bool CategoryExists(int categoryId);
+
     }
 }

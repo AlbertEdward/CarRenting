@@ -31,9 +31,9 @@
         var car = cars[i];
 
         <div class="carousel-item img-fluid @(activeCarouselIndex == i ? "active": "")" >
-          <img class="d-block w-75" src="@car.ImageUrl" alt="@car.Make @car.Model @car.Year">
+          <img class="d-block w-75" src="@car.ImageUrl" alt="@car.Brand @car.Model @car.Year">
               <div class="carousel-caption d-none d-md-block">
-                <h5>@car.Make @car.Model (@car.Year)</h5>
+                <h5>@car.Brand @car.Model (@car.Year)</h5>
                 <p>@car.Description.Substring(0, 50)...</p>
               </div>
         </div>

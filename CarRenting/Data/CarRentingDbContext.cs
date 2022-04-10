@@ -6,6 +6,10 @@ namespace CarRenting.Data
 {
     public class CarRentingDbContext : IdentityDbContext
     {
+        public CarRentingDbContext()
+        {
+        }
+
         public CarRentingDbContext(DbContextOptions<CarRentingDbContext> options)
             : base(options)
         {
@@ -34,6 +38,5 @@ namespace CarRenting.Data
 
             base.OnModelCreating(builder);
         }
-
     }
 }

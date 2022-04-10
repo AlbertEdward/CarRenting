@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using CarRenting.Services.Cars;
 using static CarRenting.Data.DataConstants;
+
 
 namespace CarRenting.Models.Cars
 {
@@ -7,8 +9,7 @@ namespace CarRenting.Models.Cars
     {
         [Required]
         [StringLength(CarMakeMaxLength)]
-        [Display(Name = "Brand")]
-        public string Make { get; init; }
+        public string Brand { get; init; }
 
         [Required]
         [StringLength(CarModelMaxLength)]
@@ -31,6 +32,6 @@ namespace CarRenting.Models.Cars
         [Display(Name ="Category")]
         public int CategoryId { get; init; }
 
-        public IEnumerable<CarCategoryViewModel> Categories { get; set; }
+        public IEnumerable<CarCategoryServiceModel> Categories { get; set; }
     }
 }

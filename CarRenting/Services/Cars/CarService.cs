@@ -24,13 +24,13 @@ namespace CarRenting.Services.Cars
 
             if (!string.IsNullOrWhiteSpace(brand))
             {
-                carsQuery = carsQuery.Where(c => c.Make == brand);
+                carsQuery = carsQuery.Where(c => c.Brand == brand);
             }
 
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
                 carsQuery = carsQuery.Where(c =>
-                    c.Make.ToLower().Contains(searchTerm.ToLower()) ||
+                    c.Brand.ToLower().Contains(searchTerm.ToLower()) ||
                     c.Model.ToLower().Contains(searchTerm.ToLower()) ||
                     c.Description.ToLower().Contains(searchTerm.ToLower()));
             }
@@ -38,7 +38,7 @@ namespace CarRenting.Services.Cars
             carsQuery = sorting switch
             {
                 CarSorting.Year => carsQuery.OrderByDescending(c => c.Year),
-                CarSorting.BrandAndModel => carsQuery.OrderBy(c => c.Make).ThenBy(c => c.Model),
+                CarSorting.BrandAndModel => carsQuery.OrderBy(c => c.Brand).ThenBy(c => c.Model),
                 CarSorting.DateCreated or  _ => carsQuery.OrderByDescending(c => c.Id)
             };
 
@@ -52,11 +52,11 @@ namespace CarRenting.Services.Cars
                 .Select(car => new CarServiceModel
                 {
                     Id = car.Id,
-                    Make = car.Make,
+                    Brand = car.Brand,
                     Model = car.Model,
                     Year = car.Year,
                     ImageUrl = car.ImageUrl,
-                    Category = car.Category.Name,
+                    CategoryName = car.Category.Name,
                     IsActive = car.IsActive
                 })
                 .ToList();
@@ -70,14 +70,24 @@ namespace CarRenting.Services.Cars
             };
         }
 
-        public IEnumerable<string> AllCarBrands()
+        public IEnumerable<string> AllBrands()
             => this.data
                 .Cars
-                .Select(c => c.Make)
+                .Select(c => c.Brand)
                 .Distinct()
                 .ToList();
 
-        public CarQueryServiceModel AllCarsInactive(string brand,
+        public IEnumerable<CarCategoryServiceModel> AllCategories()
+            => this.data
+                .Categories
+                .Select(c => new CarCategoryServiceModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                })
+                .ToList();
+
+        public CarQueryServiceModel AllInactive(string brand,
             string searchTerm,
             CarSorting sorting,
             int currentPage,
@@ -88,13 +98,13 @@ namespace CarRenting.Services.Cars
 
             if (!string.IsNullOrWhiteSpace(brand))
             {
-                carsQuery = carsQuery.Where(c => c.Make == brand);
+                carsQuery = carsQuery.Where(c => c.Brand == brand);
             }
 
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
                 carsQuery = carsQuery.Where(c =>
-                    c.Make.ToLower().Contains(searchTerm.ToLower()) ||
+                    c.Brand.ToLower().Contains(searchTerm.ToLower()) ||
                     c.Model.ToLower().Contains(searchTerm.ToLower()) ||
                     c.Description.ToLower().Contains(searchTerm.ToLower()));
             }
@@ -102,7 +112,7 @@ namespace CarRenting.Services.Cars
             carsQuery = sorting switch
             {
                 CarSorting.Year => carsQuery.OrderByDescending(c => c.Year),
-                CarSorting.BrandAndModel => carsQuery.OrderBy(c => c.Make).ThenBy(c => c.Model),
+                CarSorting.BrandAndModel => carsQuery.OrderBy(c => c.Brand).ThenBy(c => c.Model),
                 CarSorting.DateCreated or  _ => carsQuery.OrderByDescending(c => c.Id)
             };
 
@@ -115,11 +125,11 @@ namespace CarRenting.Services.Cars
                 .Select(car => new CarServiceModel
                 {
                     Id = car.Id,
-                    Make = car.Make,
+                    Brand = car.Brand,
                     Model = car.Model,
                     Year = car.Year,
                     ImageUrl = car.ImageUrl,
-                    Category = car.Category.Name,
+                    CategoryName = car.Category.Name,
                     IsActive = car.IsActive
                 })
                 .ToList();
@@ -132,5 +142,46 @@ namespace CarRenting.Services.Cars
                 Cars = cars
             };
         }
+
+        public bool CategoryExists(int categoryId)
+            => this.data
+                .Categories
+                .Any(c => c.Id == categoryId);
+
+        public int Create(string make, string model, string description, string imageUrl, int year, int categoryId, bool isActive)
+        {
+            var carData = new Car
+            {
+                Brand = make,
+                Model = model,
+                Description = description,
+                ImageUrl = imageUrl,
+                Year = year,
+                CategoryId = categoryId,
+                IsActive = isActive
+            };
+
+            this.data.Cars.Add(carData);
+            this.data.SaveChanges();
+
+            return carData.Id;
+        }
+
+        public CarDetailsServiceModel Details(int id)
+        => this.data
+            .Cars
+            .Where(c => c.Id == id)
+            .Select(car => new CarDetailsServiceModel
+            {
+                Id = car.Id,
+                Brand = car.Brand,
+                Model = car.Model,
+                Description = car.Description,
+                Year = car.Year,
+                ImageUrl = car.ImageUrl,
+                CategoryName = car.Category.Name,
+                IsActive = car.IsActive
+            })
+            .FirstOrDefault();
     }
 }

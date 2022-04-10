@@ -10,7 +10,7 @@ namespace CarRenting.Data.Models
 
         [Required]
         [MaxLength(CarMakeMaxLength)]
-        public string Make { get; set; }
+        public string Brand { get; set; }
 
         [Required]
         [MaxLength(CarModelMaxLength)]

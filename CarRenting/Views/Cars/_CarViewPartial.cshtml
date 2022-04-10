@@ -35,9 +35,9 @@
 @foreach (var car in Model.Cars)
 {
     <div class="card mb-3 ms-2" style="width: 18rem;">
-        <img class="card-img-top" src="@car.ImageUrl" alt="@car.Make @car.Model @car.Year">
+        <img class="card-img-top" src="@car.ImageUrl" alt="@car.Brand @car.Model @car.Year">
         <div class="card-body text-center">
-            <h5 class="card-title">@car.Make @car.Model (@car.Year) - @car.Category</h5>
+            <h5 class="card-title">@car.Brand | @car.Model | @car.Year | @car.CategoryName</h5>
             <p class="card-text">Some text about car...</p>
             <a asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id" class="btn btn-primary">View</a>
             @if (User.Identity.IsAuthenticated)

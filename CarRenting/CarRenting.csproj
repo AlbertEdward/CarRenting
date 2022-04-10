@@ -19,4 +19,28 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\.browserslistrc" />
+    <None Include="wwwroot\.gitignore" />
+    <None Include="wwwroot\.travis.yml" />
+    <None Include="wwwroot\html\404.html" />
+    <None Include="wwwroot\html\blank.html" />
+    <None Include="wwwroot\html\buttons.html" />
+    <None Include="wwwroot\html\cards.html" />
+    <None Include="wwwroot\html\charts.html" />
+    <None Include="wwwroot\html\forgot-password.html" />
+    <None Include="wwwroot\html\index.html" />
+    <None Include="wwwroot\html\login.html" />
+    <None Include="wwwroot\html\register.html" />
+    <None Include="wwwroot\html\tables.html" />
+    <None Include="wwwroot\html\utilities-animation.html" />
+    <None Include="wwwroot\html\utilities-border.html" />
+    <None Include="wwwroot\html\utilities-color.html" />
+    <None Include="wwwroot\html\utilities-other.html" />
+    <None Include="wwwroot\js\gulpfile.js" />
+    <None Include="wwwroot\LICENSE" />
+    <None Include="wwwroot\PRO_UPGRADE.txt" />
+    <None Include="wwwroot\README.md" />
+  </ItemGroup>
+
 </Project>

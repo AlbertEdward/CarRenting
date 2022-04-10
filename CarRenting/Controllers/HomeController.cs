@@ -28,11 +28,11 @@ namespace CarRenting.Controllers
 
             var cars = this.data
                 .Cars
-                .OrderByDescending(c => c.Id) // TODO Order by creation date
+                .OrderByDescending(c => c.Id)
                 .Select(c => new CarIndexViewModel
                 {
                     Id = c.Id,
-                    Make = c.Make,
+                    Brand = c.Brand,
                     Model = c.Model,
                     Year = c.Year,
                     ImageUrl = c.ImageUrl,
