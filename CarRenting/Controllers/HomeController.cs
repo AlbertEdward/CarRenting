@@ -38,7 +38,7 @@ namespace CarRenting.Controllers
                     ImageUrl = c.ImageUrl,
                     Description = c.Description
                 })
-                .Take(4)
+                .Take(3)
                 .ToList();
 
             var totalStatistics = this.statistics.Total();
