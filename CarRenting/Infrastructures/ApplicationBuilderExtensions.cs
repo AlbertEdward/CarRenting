@@ -72,7 +72,7 @@ namespace CarRenting.Infrastructures
                 await roleManager.CreateAsync(role);
 
                 const string adminEmail = "admin@abv.bg";
-                const string adminPassword = "123456";
+                const string adminPassword = "123456789";
 
                 var applicationUser = new ApplicationUser
                 {
