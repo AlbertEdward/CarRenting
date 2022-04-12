@@ -14,7 +14,6 @@ namespace CarRenting.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserStore<ApplicationUser> userStore;
-        private readonly IUserEmailStore<ApplicationUser> emailStore;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
