@@ -4,7 +4,7 @@ namespace CarRenting.Controllers
 {
     public class AboutController : Controller
     {
-        public IActionResult AboutUs()
+        public IActionResult Index()
         {
             return View();
         }
