@@ -1,8 +1,10 @@
 ﻿using CarRenting.Data;
 using CarRenting.Models.Cars;
 using CarRenting.Services.Cars;
+using CarRenting.Services.Orders;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static CarRenting.WebConstants;
 
 namespace CarRenting.Controllers
 {
@@ -10,19 +12,48 @@ namespace CarRenting.Controllers
     {
         private readonly CarRentingDbContext data;
         private readonly ICarService carService;
+        private readonly IOrderService orderService;
 
-        public CarsController(CarRentingDbContext data, ICarService carService)
+        public CarsController(CarRentingDbContext data, ICarService carService, IOrderService orderService)
         {
             this.data = data;
             this.carService = carService;
-
+            this.orderService = orderService;
         }
-
+        
         [Authorize]
         public IActionResult Add() => View(new CarFormModel
         {
             Categories = this.carService.AllCategories()
         });
+
+        public IActionResult Details(int id)
+        {
+            var car = this.carService.Details(id);
+
+            return View(new CarFormModel
+            {
+                Id = id,
+                Brand = car.Brand,
+                Model = car.Model,
+                Description = car.Description,
+                ImageUrl = car.ImageUrl,
+                Year = car.Year,
+                IsActive = car.IsActive,
+                Categories = this.carService.AllCategories()
+            });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult CreateOrder(CarFormModel car)
+        {
+            TempData[GlobalMessage] = "Placed Order!";
+
+            var order = this.orderService.CreateOrder(car.Id);
+
+            return RedirectToAction("Index", "Orders");
+        }
 
         public IActionResult All([FromQuery]AllCarsQueryModel query)
         {

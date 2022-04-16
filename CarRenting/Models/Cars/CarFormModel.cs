@@ -7,6 +7,8 @@ namespace CarRenting.Models.Cars
 {
     public class CarFormModel
     {
+        public int Id { get; set; }
+
         [Required]
         [StringLength(CarMakeMaxLength)]
         public string Brand { get; init; }

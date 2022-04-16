@@ -1,0 +1,33 @@
+﻿@model CarFormModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-3 col-lg-8 offset-xl-3 col-xl-6">
+        <h2 class="heading-margin">@ViewBag.Title</h2>
+       <ul>
+           <li>
+               <img class="car-details-image" src="@Model.ImageUrl" />
+           </li>
+           <li>
+               Brand: @Model.Brand
+           </li>
+           <li>
+               Model: @Model.Model
+           </li>
+           <li>
+               Description: @Model.Description
+           </li>
+           <li>
+               IsActive: @Model.IsActive
+           </li>
+       </ul>
+       <form method="post" asp-controller="Cars" asp-action="CreateOrder" asp-route-id="@Model.Id">
+       <input asp-for="Id" class="visually-hidden" value="@Model.Id" />
+       <input class="btn btn-warning mt-2" type="submit" value="Order"/>
+
+       </form>
+    </div>
+</div>

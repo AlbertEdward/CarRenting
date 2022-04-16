@@ -61,7 +61,7 @@ namespace CarRenting.Areas.Identity.Pages.Account
                 var result = await signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return LocalRedirect(returnUrl);
+                    return RedirectToAction("All", "Cars");
                 }
                 if (result.IsLockedOut)
                 {

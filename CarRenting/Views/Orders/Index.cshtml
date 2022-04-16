@@ -1,0 +1,8 @@
+﻿@{
+    ViewData["Title"] = "Order!";
+}
+
+@if (TempData.ContainsKey(WebConstants.GlobalMessage))
+    {
+        <div class="alert alert-success" role="alert">@TempData[WebConstants.GlobalMessage] </div>
+    }

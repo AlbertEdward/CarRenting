@@ -184,3 +184,7 @@ img {
         display: flex !important;
     }
 }
+
+.car-details-image{
+    height: 200px;
+}

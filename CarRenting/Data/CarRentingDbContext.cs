@@ -17,6 +17,8 @@ namespace CarRenting.Data
 
         public DbSet<Car> Cars { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
         public DbSet<Category> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
