@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" >
-
 html {
     font-size: 14px;
 }
@@ -118,7 +116,7 @@ img {
 }
 
 .aboutus-content h1 span {
-    color: #71b100;
+    color: #ffd800;
 }
 
 .aboutus-content h4 {
@@ -168,7 +166,7 @@ img {
 
 .counter .single-counter h2 {
     font-size: 30px;
-    color: #71b100;
+    color: #ffd800;
     line-height: 24px;
     font-family: "Open Sans", sans-serif;
     margin-bottom: 8px;
@@ -178,5 +176,11 @@ img {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 0;
-    color: #8f8f8f;
+    color: #ffd800;
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+    .navbar-collapse.collapse.d-sm-inline-flex.justify-content-between {
+        display: flex !important;
+    }
 }
